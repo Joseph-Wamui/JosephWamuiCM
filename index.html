@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Wamui - Construction Project Manager</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2a5298;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: visible;
+            white-space: normal;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e0e0e0;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        #typing-cursor {
+            display: inline-block;
+            color: #fff;
+            font-weight: 400;
+            font-size: 1em;
+            margin-left: 2px;
+            animation: blink-cursor 0.8s steps(2, start) infinite;
+            transition: opacity 0.3s;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        #typing-cursor.hide {
+            opacity: 0;
+            animation: none;
+        }
+
+        .hero-content a.btn {
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            background: #2a5298;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #1e3c72;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2a5298;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+        .contact-info i {
+            color: #2a5298;
+            margin-right: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #2a5298;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #2a5298, #1e3c72);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #2a5298, #1e3c72);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            color: #2a5298;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-value {
+            color: #ee5a24;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #2a5298, #1e3c72);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #2a5298;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -35px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -35px;
+        }
+
+        .timeline-date {
+            color: #ee5a24;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: #2a5298;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-subtitle {
+                font-size: 2.6rem;
+                font-weight: bold;
+                margin-top: -0.7rem;
+                margin-bottom: 1.5rem;
+                color: #e0e0e0;
+                letter-spacing: 0.05em;
+                text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content a.btn {
+                font-size: 1.1rem;
+                padding: 12px 24px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            .hero {
+                padding: 0 10px;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                width: calc(100% - 40px);
+                left: 40px !important;
+            }
+            .timeline-item::before {
+                left: -35px !important;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 6px;
+            }
+            .hero-content h1 {
+                font-size: 1.2rem;
+            }
+            .hero-content a.btn {
+                font-size: 0.95rem;
+                padding: 10px 14px;
+            }
+            .btn {
+                padding: 10px 14px;
+                font-size: 0.95rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Joseph Wamui</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <img src="/pexels-eberhard-grossgasteiger-2098428.jpg" alt="Construction Background" class="hero-img">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1><span id="typed-joseph"></span><span id="typing-cursor">|</span></h1>
+<p class="hero-subtitle">Construction Manager</p>
+            <a href="#projects" class="btn">View My Projects</a>
+        </div>
+    </section>
+
+    <script>
+        // Typing effect for 'Joseph' with blinking cursor that hides after typing
+        document.addEventListener('DOMContentLoaded', function() {
+            const name = "Joseph Wamui";
+            const target = document.getElementById('typed-joseph');
+            const cursor = document.getElementById('typing-cursor');
+            let i = 0;
+            function typeNext() {
+                if (i <= name.length) {
+                    target.textContent = name.slice(0, i);
+                    i++;
+                    setTimeout(typeNext, 200); // slower typing
+                } else {
+                    setTimeout(() => {
+                        cursor.classList.add('hide'); // hide cursor after typing
+                    }, 400);
+                }
+            }
+            typeNext();
+        });
+    </script>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="profile-card fade-in">
+                    <div class="profile-img">
+                        <img src="ID.jpeg" alt="Joseph Wamui Photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+                    </div>
+                    <h3>Joseph Wamui</h3>
+                    <p>Construction Project Manager</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +254 769 204990</p>
+                        <p><i class="fas fa-envelope"></i> josewamui08@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 style="color: #2a5298; margin-bottom: 1rem;">Professional Summary</h3>
+                    <p>Dedicated Construction Manager with 3+ years of progressive experience managing high-value residential and commercial real estate development projects. Proven expertise in project documentation, subcontractor coordination, and material take-offs using industry-standard software.</p>
+                    <br>
+                    <p>Strong track record of delivering complex development projects on time and within budget through effective scheduling, stakeholder management, and quality control. Experienced with contract administration, submittal reviews, and comprehensive project documentation systems.</p>
+                    <br>
+                    <h4 style="color: #2a5298;">Education</h4>
+                    <p><strong>Bachelor of the Built Environment (Construction Management)</strong><br>
+                    Technical University of Kenya (2016 - 2021)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-tools"></i> Technical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MS Project</span>
+                        <span class="skill-tag">Primavera</span>
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">Archi-CAD</span>
+                        <span class="skill-tag">PlanSwift</span>
+                        <span class="skill-tag">Bluebeam</span>
+                        <span class="skill-tag">MS Office Suite</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-users"></i> Management Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Project Planning</span>
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Stakeholder Management</span>
+                        <span class="skill-tag">Contract Management</span>
+                        <span class="skill-tag">Quality Control</span>
+                        <span class="skill-tag">Risk Assessment</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-shield-alt"></i> Safety & Compliance</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Safety Protocols</span>
+                        <span class="skill-tag">FIDIC Contracts</span>
+                        <span class="skill-tag">Site Inspections</span>
+                        <span class="skill-tag">Building Codes</span>
+                        <span class="skill-tag">Quality Assurance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Kajiado Integrated Cancer Treatment Hospital</h3>
+                        <p class="project-value">Contract Value: KSH 1.3 Billion</p>
+                        <p class="project-description">Led feasibility study and project coordination for this major healthcare infrastructure project in Kajiado County. Collaborated with consultants and stakeholders to ensure compliance with medical facility standards.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">18-Storey Zara Max Apartments</h3>
+                        <p class="project-value">Contract Value: KSH 420 Million</p>
+                        <p class="project-description">Coordinated design phase execution for this high-rise residential development in Parklands, Nairobi. Managed project consultants and ensured timely contract completion.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Green-port Warehouse</h3>
+                        <p class="project-value">Contract Value: KSH 83 Million</p>
+                        <p class="project-description">Supervised construction execution of this commercial warehouse facility in Narok County. Ensured adherence to industrial construction standards and timeline requirements.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">12-Storey Zara Apartments South C</h3>
+                        <p class="project-value">Contract Value: KSH 284 Million</p>
+                        <p class="project-description">Collaborated with project consultants and main contractor for the construction phase of this residential development. Ensured quality control and project completion within budget.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Cradle Lodwar Hotel</h3>
+                        <p class="project-value">Contract Value: KSH 33.4 Million</p>
+                        <p class="project-description">Managed hospitality construction project in Turkana County. Coordinated with specialized contractors for hotel-specific requirements and finishes.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">PAC University Sports Facilities</h3>
+                        <p class="project-value">Contract Value: KSH 6.4 Million</p>
+                        <p class="project-description">Supervised construction of football pitch and 240m stormwater drain infrastructure. Managed site works reporting and subcontractor coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">February 2025 - Present</div>
+                    <h3 class="timeline-title">Construction Manager</h3>
+                    <p class="timeline-company">Archinland Limited</p>
+                    <p>Leading project execution for diverse clients, managing renovations and new constructions from inception to completion. Creating technical specifications, generating Bills of Quantities using PlanSwift, and overseeing subcontractor management.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">March 2024 - September 2024</div>
+                    <h3 class="timeline-title">Assistant Project Manager</h3>
+                    <p class="timeline-company">InfraCost Consulting Ltd.</p>
+                    <p>Collaborated on feasibility studies including the Kajiado Cancer Hospital project. Managed project documentation, quality control compliance, and coordinated with consultants on multiple residential and commercial projects.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">October 2021 - June 2023</div>
+                    <h3 class="timeline-title">Project Manager</h3>
+                    <p class="timeline-company">Kasha Properties Ltd.</p>
+                    <p>Managed construction phase of 12-story Zara Apartments in South C and design phase of 18-story Zara Max Apartments in Parklands. Developed comprehensive project schedules using Gantt charts and MS Project.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">April 2020 - July 2020</div>
+                    <h3 class="timeline-title">Site Supervisor</h3>
+                    <p class="timeline-company">Sahjanad Construction Ltd.</p>
+                    <p>Supervised site works for stormwater drain and football field at PAC University. Scheduled labor, ordered materials, and coordinated with subcontractors for project completion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h3>Get In Touch</h3>
+            <p>Ready to discuss your next construction project?</p>
+            <div class="social-links">
+                <a href="tel:+254769204990"><i class="fas fa-phone"></i></a>
+                <a href="mailto:josewamui08@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.7;"> 2025 Joseph Wamui. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+        // Mobile menu toggle (basic)
+        const createMobileMenu = () => {
+            if (window.innerWidth <= 768) {
+                const nav = document.querySelector('.nav-links');
+                const logo = document.querySelector('.logo');
+                
+                // Create hamburger menu
+                const hamburger = document.createElement('div');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                hamburger.style.cssText = 'cursor: pointer; font-size: 1.5rem; color: #2a5298;';
+                
+                hamburger.addEventListener('click', () => {
+                    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                    nav.style.position = 'absolute';
+                    nav.style.top = '100%';
+                    nav.style.left = '0';
+                    nav.style.right = '0';
+                    nav.style.background = 'white';
+                    nav.style.flexDirection = 'column';
+                    nav.style.padding = '1rem';
+                    nav.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+                
+                logo.parentNode.appendChild(hamburger);
+            }
+        };
+
+        // Initialize mobile menu
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+    </script>
+</body>
+</html>
