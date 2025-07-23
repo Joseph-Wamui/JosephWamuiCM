@@ -448,7 +448,50 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
+                display: flex;
+                list-style: none;
+                gap: 2rem;
+            }
+            .hamburger {
                 display: none;
+                flex-direction: column;
+                cursor: pointer;
+                width: 32px;
+                height: 32px;
+                justify-content: center;
+                align-items: center;
+                z-index: 1100;
+            }
+            .hamburger span {
+                height: 4px;
+                width: 100%;
+                background: #2a5298;
+                margin: 4px 0;
+                border-radius: 2px;
+                display: block;
+                transition: 0.4s;
+            }
+            @media (max-width: 768px) {
+                .nav-links {
+                    display: none;
+                    position: absolute;
+                    top: 60px;
+                    right: 20px;
+                    background: #fff;
+                    flex-direction: column;
+                    gap: 0;
+                    width: 180px;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+                    border-radius: 10px;
+                    overflow: hidden;
+                    z-index: 1001;
+                }
+                .nav-links.active {
+                    display: flex;
+                }
+                .hamburger {
+                    display: flex;
+                }
             }
             .hero-subtitle {
                 font-size: 2.6rem;
@@ -499,6 +542,9 @@
             .hero-content h1 {
                 font-size: 1.2rem;
             }
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
             .hero-content a.btn {
                 font-size: 0.95rem;
                 padding: 10px 14px;
@@ -516,20 +562,25 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Joseph Wamui</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <div class="logo">Joseph Wamui</div>
+    <div class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
     </header>
 
     <section id="home" class="hero">
-        <img src="/pexels-eberhard-grossgasteiger-2098428.jpg" alt="Construction Background" class="hero-img">
+        <img src="pexels-eberhard-grossgasteiger-2098428.jpg" alt="Construction Background" class="hero-img">
         <div class="overlay"></div>
         <div class="hero-content">
             <h1><span id="typed-joseph"></span><span id="typing-cursor">|</span></h1>
@@ -539,6 +590,20 @@
     </section>
 
     <script>
+        // Hamburger menu for mobile nav
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navLinks = document.getElementById('nav-links');
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            // Close menu on link click
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        });
         // Typing effect for 'Joseph' with blinking cursor that hides after typing
         document.addEventListener('DOMContentLoaded', function() {
             const name = "Joseph Wamui";
